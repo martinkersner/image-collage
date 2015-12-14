@@ -13,9 +13,9 @@ def main():
 
     dataset = Dataset(dataset_path)
     #dataset.create()
-    data, filenames = dataset.load(dataset_csv)
+    file_paths, rgb_means = dataset.load(dataset_csv)
 
-    collage = Collage(img_path, dataset_path, data, filenames)
+    collage = Collage(img_path, dataset_path, file_paths, rgb_means)
     img_collage = collage.create()
     io.imsave("collage.png", img_collage)
 

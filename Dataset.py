@@ -4,18 +4,15 @@
 # 2015/12/14
 
 import os
-import csv
+import pandas as pd
 import numpy as np
 from skimage import io
-
-# TODO used pandas
 
 class Dataset:
     def __init__(self, dataset_path):
         self.dataset_path = dataset_path
         self.ext = [".png", ".jpg"]
         self.delimiter = ","
-        self.dataset_filenames = []
 
     def create(self):
         for filename in os.listdir(self.dataset_path):
@@ -52,11 +49,8 @@ class Dataset:
             return False
 
     def load(self, csv_path):
-        self.dataset = np.loadtxt(open(csv_path,"rb"), delimiter=",", usecols=(1,2,3), dtype=np.int)
+        data = pd.read_csv(csv_path, names=["file_path", "r", "g", "b"], header=None)
+        self.file_paths = data["file_path"]
+        self.rgb_means  = data[["r", "g", "b"]]
 
-        with open(csv_path, "rb") as f:
-            filenames_reader = csv.reader(f, delimiter=",")
-            for row in filenames_reader:
-                self.dataset_filenames.append(row[0])
-
-        return self.dataset, self.dataset_filenames
+        return self.file_paths, self.rgb_means
