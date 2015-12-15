@@ -15,13 +15,15 @@ class Dataset:
         self.delimiter = ","
 
     def create(self):
-        for filename in os.listdir(self.dataset_path):
-            if self.is_image(filename):
-                img_path = os.path.join(self.dataset_path, filename)
-                img = io.imread(img_path)
-                
-                R, G, B = self.compute_mean(img)
-                self.print_line(filename, R, G, B) 
+        for subdir, dirs, files in os.walk(self.dataset_path):
+            for filename in files:
+                if self.is_image(filename):
+                    img_path = os.path.join(subdir, filename)
+                    img = io.imread(img_path)
+                    
+                    R, G, B = self.compute_mean(img)
+
+                    self.print_line(img_path, R, G, B) 
 
     def is_image(self, filename):
         if filename.endswith(tuple(self.ext)):

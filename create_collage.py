@@ -8,14 +8,15 @@ from Dataset import *
 
 def main():
     img_path     = "lena.png"
-    dataset_path = "/home/martin/datasets/flickr-dataset/20x20"
+    dataset_path = "/home/martin/datasets/flickr/thumbnails"
     dataset_csv  = "dataset.csv"
+    block_size   = 64
 
     dataset = Dataset(dataset_path)
     #dataset.create()
     file_paths, rgb_means = dataset.load(dataset_csv)
 
-    collage = Collage(img_path, dataset_path, file_paths, rgb_means)
+    collage = Collage(img_path, file_paths, rgb_means, block_size)
     img_collage = collage.create()
     io.imsave("collage.png", img_collage)
 

@@ -10,13 +10,12 @@ from skimage.transform import downscale_local_mean
 from sklearn.metrics import pairwise_distances_argmin_min
 
 class Collage:
-    def __init__(self, img_path, data_path, file_paths, rgb_means):
+    def __init__(self, img_path, file_paths, rgb_means, block_size):
         self.img = io.imread(img_path)
 
         self.down_factor = 10
-        self.block_size  = 20
+        self.block_size  = block_size
         
-        self.data_path  = data_path
         self.file_paths = file_paths
         self.rgb_means  = rgb_means
 
@@ -67,7 +66,7 @@ class Collage:
     def closest_image(self, pixel):
         index, _ = pairwise_distances_argmin_min(pixel, self.rgb_means)
 
-        img_path = os.path.join(self.data_path, self.file_paths[index[0]])
+        img_path = self.file_paths[index[0]]
         img = io.imread(img_path)
 
         return img
