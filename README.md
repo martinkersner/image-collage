@@ -1,6 +1,6 @@
 # Image Collage
 
-Martin Keršner, [m.kersner@gmail.com](mailto:m.kersner@gmail.com),
+Martin Keršner, [m.kersner@gmail.com](mailto:m.kersner@gmail.com)
 
 ## Info 
 Images used for collage are part of [Flickr dataset](http://press.liacs.nl/mirflickr/mirdownload.html), particularly thumbnail images (64x64 px).
